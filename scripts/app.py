@@ -37,6 +37,22 @@ def render_markdown_report(path: Path, strip_images: bool = True):
     st.markdown(text)
 
 
+def _data_available() -> bool:
+    """False on the hosted deployment, where data/ and models/ aren't shipped -
+    the source dataset's license doesn't allow redistributing real transaction
+    rows (see .gitignore). Features needing them degrade to an explanation."""
+    return (PROJECT_ROOT / "data" / "processed" / "test_predictions.parquet").exists()
+
+
+def _no_data_message():
+    st.info(
+        "This feature needs the real transaction dataset, which isn't included here - "
+        "the Kaggle dataset's license doesn't allow redistributing it, even in "
+        "processed form. Clone the repo, download the dataset yourself (see README), "
+        "and run the dashboard locally to try it."
+    )
+
+
 @st.cache_data
 def load_flagged_transactions():
     predictions = pd.read_parquet(PROJECT_ROOT / "data" / "processed" / "test_predictions.parquet")
@@ -53,11 +69,8 @@ def load_threshold_sweep():
 
 @st.cache_data
 def build_sample_template() -> bytes:
-    import duckdb
-    con = duckdb.connect(str(PROJECT_ROOT / "data" / "warehouse.duckdb"), read_only=True)
-    cols = scoring.required_columns()
-    sample = con.execute(f"SELECT {', '.join(cols)} FROM transactions USING SAMPLE 5").fetchdf()
-    return sample.to_csv(index=False).encode("utf-8")
+    path = PROJECT_ROOT / "data" / "processed" / "sample_template.csv"
+    return path.read_bytes()
 
 
 # ------------------------------------------------------------------ Overview
@@ -89,16 +102,23 @@ def render_overview():
         "flagging it. The full interactive version - pick any transaction, or upload your "
         "own - is in the Investigation Agent tab."
     )
-    flagged = load_flagged_transactions()
-    example = flagged.iloc[0]
-    with st.spinner("Loading example..."):
-        evidence = gather_all_evidence(int(example["TransactionID"]))
-    e1, e2, e3 = st.columns(3)
-    e1.metric("Amount", f"${example['TransactionAmt']:,.2f}")
-    e2.metric("Model's fraud score", f"{example['xgb_fraud_probability']:.1%}")
-    e3.metric("Actually fraud?", "Yes" if example["isFraud"] else "No")
-    shap_display = pd.DataFrame(evidence["shap_reasons"]["reasons"])[["feature", "direction", "shap_value", "meaning"]]
-    st.dataframe(shap_display, hide_index=True, width="stretch")
+    if not _data_available():
+        _no_data_message()
+        st.caption(
+            "The Explainability (SHAP) tab above shows real worked examples of this, "
+            "already written up from an actual run."
+        )
+    else:
+        flagged = load_flagged_transactions()
+        example = flagged.iloc[0]
+        with st.spinner("Loading example..."):
+            evidence = gather_all_evidence(int(example["TransactionID"]))
+        e1, e2, e3 = st.columns(3)
+        e1.metric("Amount", f"${example['TransactionAmt']:,.2f}")
+        e2.metric("Model's fraud score", f"{example['xgb_fraud_probability']:.1%}")
+        e3.metric("Actually fraud?", "Yes" if example["isFraud"] else "No")
+        shap_display = pd.DataFrame(evidence["shap_reasons"]["reasons"])[["feature", "direction", "shap_value", "meaning"]]
+        st.dataframe(shap_display, hide_index=True, width="stretch")
 
     st.divider()
     with st.expander("Full results detail"):
@@ -198,14 +218,22 @@ def render_note_section(evidence: dict, note_key: str, transaction_id=None):
                     st.text(note)
                 except Exception as e:
                     st.error(
-                        f"Couldn't reach the local AI model. Is Ollama running? "
-                        f"(brew services start ollama)\n\nError: {e}"
+                        "Couldn't reach a local AI model at localhost:11434. This feature "
+                        "calls a model running on the same machine as the app, via Ollama - "
+                        "on this hosted version, there isn't one running. To try it yourself: "
+                        "clone the repo and run it locally with Ollama installed (see README "
+                        "setup steps). The Evaluation results tab shows real, pre-generated "
+                        "examples of what this produces.\n\n"
+                        f"Error detail: {e}"
                     )
         else:
             st.info("Click the button to generate this live.")
 
 
 def render_existing_browser():
+    if not _data_available():
+        _no_data_message()
+        return
     flagged = load_flagged_transactions()
     col1, col2 = st.columns([2, 1])
     with col1:
@@ -238,6 +266,9 @@ def render_existing_browser():
 
 
 def render_upload_scorer():
+    if not _data_available():
+        _no_data_message()
+        return
     st.caption(
         "Upload a CSV of NEW transactions (same columns as this project's data - not "
         "retrained, just scored with the model already built in Stages 1-5)."
@@ -296,12 +327,21 @@ def render_agent_stage():
         "4 tools gather real evidence for a flagged transaction; a template (no AI) and a "
         "local LLM each turn it into a case note."
     )
-    st.info(
-        "The AI note-writing (below and in 'Upload new transactions') calls a language "
-        "model running locally on this machine via Ollama, not a hosted API. If a note "
-        "fails to generate, Ollama isn't running — start it with `brew services start "
-        "ollama` (see README for full setup)."
-    )
+    if _data_available():
+        st.info(
+            "The AI note-writing (below and in 'Upload new transactions') calls a "
+            "language model running locally on this machine via Ollama, not a hosted "
+            "API. If a note fails to generate, Ollama isn't running — start it with "
+            "`brew services start ollama` (see README for full setup)."
+        )
+    else:
+        st.info(
+            "'Browse this project's data' and 'Upload new transactions' need the real "
+            "transaction dataset and a locally-running AI model (Ollama) — neither is "
+            "included on this hosted site (see README for why). 'Evaluation results' "
+            "below shows real, pre-generated examples of what both produce; clone the "
+            "repo and run it locally to try them live."
+        )
     sub_a, sub_b, sub_c = st.tabs(["Browse this project's data", "Upload new transactions", "Evaluation results"])
     with sub_a:
         render_existing_browser()

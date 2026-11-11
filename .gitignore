@@ -1,10 +1,16 @@
 
-# Raw/processed data - too big for GitHub, and the dataset's license says don't redistribute it.
-# See README.md for download instructions instead.
+# Raw AND processed data - the dataset's license says don't redistribute it, and
+# data/processed/ still contains real per-transaction rows (just fewer columns).
+# See README.md for how to regenerate these locally. The hosted dashboard degrades
+# gracefully when these are missing (see app.py's _data_available()).
 data/
 
-# Trained models - reproducible from code + data, not worth storing as binaries
+# Trained models - small, no raw transaction data inside, but only useful together
+# with data/processed/ above, so kept local-only too for a consistent hosted demo.
 models/
+
+# data/processed/ and models/ ARE committed (small, derived files, needed for the
+# hosted dashboard to run without retraining) - see README for how they're produced.
 
 # Python virtual environment
 venv/
