@@ -1,0 +1,11 @@
+duckdb
+pandas
+tabulate
+scikit-learn
+xgboost
+imbalanced-learn
+pyarrow
+matplotlib
+shap
+requests
+streamlit

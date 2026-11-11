@@ -1,0 +1,22 @@
+
+# Raw/processed data - too big for GitHub, and the dataset's license says don't redistribute it.
+# See README.md for download instructions instead.
+data/
+
+# Trained models - reproducible from code + data, not worth storing as binaries
+models/
+
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets - never commit these
+.env
+*.key
+
+# macOS
+.DS_Store

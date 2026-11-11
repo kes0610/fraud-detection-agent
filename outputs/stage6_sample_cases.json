@@ -1,0 +1,3900 @@
+[
+  {
+    "TransactionID": 3503800,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.7546155452728271,
+    "evidence": {
+      "TransactionID": 3503800,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3503775,
+            "days_before_this_transaction": 0.0,
+            "amount": 34.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3503582,
+            "days_before_this_transaction": 0.1,
+            "amount": 49.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3503527,
+            "days_before_this_transaction": 0.1,
+            "amount": 57.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3503523,
+            "days_before_this_transaction": 0.1,
+            "amount": 49.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3503505,
+            "days_before_this_transaction": 0.1,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3503444,
+            "days_before_this_transaction": 0.1,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3502630,
+            "days_before_this_transaction": 0.7,
+            "amount": 20.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3502380,
+            "days_before_this_transaction": 0.7,
+            "amount": 49.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3502161,
+            "days_before_this_transaction": 0.8,
+            "amount": 44.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3501848,
+            "days_before_this_transaction": 0.8,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3501066,
+            "amount": 994.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3501043,
+            "amount": 1104.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3501020,
+            "amount": 914.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3499765,
+            "amount": 922.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3499764,
+            "amount": 922.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 1766,
+        "this_amount": 1052.0,
+        "prior_median_amount": 66.95,
+        "prior_mean_amount": 122.75,
+        "prior_max_amount": 2369.43,
+        "this_amount_percentile_vs_history": 99.4,
+        "assessment": "This $1,052.00 transaction is higher than 99% of this card's 1766 prior transactions (median was $66.95)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.557,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "D2",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.438,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "V308",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.245,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "card6 = debit",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.162,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "C11",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.125,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3503800\n\nWhy flagged (top model factors):\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.557)\n  - D2: pushed toward FRAUD (SHAP +0.438)\n  - V308: pushed toward FRAUD (SHAP +0.245)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $1,052.00 transaction is higher than 99% of this card's 1766 prior transactions (median was $66.95).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe strongest driver for flagging this transaction is feature C11, which is pushed toward NOT-fraud, with a shap_value of -0.125. This feature is a \"counting\" feature, meaning the number of addresses associated with the payment card.\n\n**Evidence**\nThis card (approximate match) has had 10 recent transactions ( tool: get_recent_transactions_same_card), with 5 of them being confirmed fraud ( tool: find_similar_confirmed_fraud). Additionally, the transaction amount of $1052.00 is higher than 99% of this card's 1766 prior transactions ( tool: check_amount_unusualness).\n\n**Suggested next step**\nRecommend that a human analyst review this case to determine if further investigation is warranted.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3576906,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.759116530418396,
+    "evidence": {
+      "TransactionID": 3576906,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3576736,
+            "days_before_this_transaction": 0.0,
+            "amount": 1022.47,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3576654,
+            "days_before_this_transaction": 0.1,
+            "amount": 1044.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3576649,
+            "days_before_this_transaction": 0.1,
+            "amount": 1044.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3563623,
+            "days_before_this_transaction": 5.3,
+            "amount": 1093.27,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3560726,
+            "days_before_this_transaction": 6.3,
+            "amount": 976.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3560600,
+            "days_before_this_transaction": 6.3,
+            "amount": 372.13,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3556596,
+            "days_before_this_transaction": 8.0,
+            "amount": 75.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3552275,
+            "days_before_this_transaction": 9.3,
+            "amount": 100.0,
+            "product_code": "R",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3541481,
+            "days_before_this_transaction": 13.1,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3537182,
+            "days_before_this_transaction": 14.8,
+            "amount": 100.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3576410,
+            "amount": 280.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3576307,
+            "amount": 226.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3576001,
+            "amount": 209.95,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3574263,
+            "amount": 226.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3573820,
+            "amount": 213.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 132,
+        "this_amount": 226.0,
+        "prior_median_amount": 100.0,
+        "prior_mean_amount": 274.84,
+        "prior_max_amount": 1979.95,
+        "this_amount_percentile_vs_history": 72.7,
+        "assessment": "This $226.00 transaction is higher than 73% of this card's 132 prior transactions (median was $100.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C14",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.798,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.306,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.292,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "M5",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.155,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          },
+          {
+            "feature": "M9",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.141,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3576906\n\nWhy flagged (top model factors):\n  - C14: pushed toward FRAUD (SHAP +0.798)\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.306)\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.292)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $226.00 transaction is higher than 73% of this card's 132 prior transactions (median was $100.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged by the model due to the feature \"C14\" being pushed toward FRAUD with a shap value of 0.798.\n\n**Evidence**\nThe card used in this transaction has a history of 10 recent transactions, all with the product code 'W', which were found by the tool \"get_recent_transactions_same_card\". Additionally, the card was used in 5 confirmed fraud transactions in the past, which were found by the tool \"find_similar_confirmed_fraud\". The transaction amount of $226.00 is higher than 73% of the card's 132 prior transactions, according to the tool \"check_amount_unusualness\".\n\n**Suggested next step**\nReview the card's history and the confirmed fraud transactions to determine if there is a pattern or anomaly that warrants further investigation.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3465499,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.6171579360961914,
+    "evidence": {
+      "TransactionID": 3465499,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3465304,
+            "days_before_this_transaction": 0.1,
+            "amount": 51.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3463816,
+            "days_before_this_transaction": 0.9,
+            "amount": 77.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3463337,
+            "days_before_this_transaction": 1.0,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3462753,
+            "days_before_this_transaction": 1.2,
+            "amount": 53.25,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3461794,
+            "days_before_this_transaction": 1.8,
+            "amount": 49.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3461063,
+            "days_before_this_transaction": 1.9,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3460834,
+            "days_before_this_transaction": 2.0,
+            "amount": 265.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3460795,
+            "days_before_this_transaction": 2.0,
+            "amount": 97.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3460385,
+            "days_before_this_transaction": 2.1,
+            "amount": 35.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3459953,
+            "days_before_this_transaction": 2.2,
+            "amount": 209.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3465333,
+            "amount": 49.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3464403,
+            "amount": 39.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3461832,
+            "amount": 34.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3460506,
+            "amount": 34.5,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3460479,
+            "amount": 39.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 1055,
+        "this_amount": 39.0,
+        "prior_median_amount": 67.95,
+        "prior_mean_amount": 116.87,
+        "prior_max_amount": 1651.0,
+        "this_amount_percentile_vs_history": 17.1,
+        "assessment": "This $39.00 transaction is higher than 17% of this card's 1055 prior transactions (median was $67.95)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "D2",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.434,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.254,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "C14",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.214,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "M5",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.203,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          },
+          {
+            "feature": "M6",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.126,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3465499\n\nWhy flagged (top model factors):\n  - D2: pushed toward FRAUD (SHAP +0.434)\n  - TransactionAmt: pushed toward NOT-fraud (SHAP -0.254)\n  - C14: pushed toward NOT-fraud (SHAP -0.214)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $39.00 transaction is higher than 17% of this card's 1055 prior transactions (median was $67.95).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nTransaction flagged due to \"C14\" feature (direction: toward NOT-fraud) with a shap_value of -0.214.\n\n**Evidence**\nThis transaction (approximate match) had 10 similar transactions on the same card found by the \"get_recent_transactions_same_card\" tool, with 5 of those transactions being confirmed fraud. The \"find_similar_confirmed_fraud\" tool found 5 similar confirmed fraud cases with the same product code, card network, and card type. The \"check_amount_unusualness\" tool found that this transaction's amount is higher than 17% of this card's 1055 prior transactions.\n\n**Suggested next step**\nRecommend a human analyst review the case to consider whether the recent activity on the card indicates a potential issue.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3574157,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.5400420427322388,
+    "evidence": {
+      "TransactionID": 3574157,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3573373,
+            "days_before_this_transaction": 0.2,
+            "amount": 34.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3567569,
+            "days_before_this_transaction": 2.8,
+            "amount": 24.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3565049,
+            "days_before_this_transaction": 3.9,
+            "amount": 82.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3564829,
+            "days_before_this_transaction": 4.0,
+            "amount": 44.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3564054,
+            "days_before_this_transaction": 4.2,
+            "amount": 86.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3563835,
+            "days_before_this_transaction": 4.2,
+            "amount": 103.97,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3562788,
+            "days_before_this_transaction": 4.9,
+            "amount": 34.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3562267,
+            "days_before_this_transaction": 5.0,
+            "amount": 43.97,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3552447,
+            "days_before_this_transaction": 8.3,
+            "amount": 36.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3537985,
+            "days_before_this_transaction": 13.3,
+            "amount": 54.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3572518,
+            "amount": 47.5,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3571476,
+            "amount": 35.95,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3560383,
+            "amount": 40.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3560359,
+            "amount": 40.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3560356,
+            "amount": 40.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 67,
+        "this_amount": 39.0,
+        "prior_median_amount": 67.95,
+        "prior_mean_amount": 106.24,
+        "prior_max_amount": 664.0,
+        "this_amount_percentile_vs_history": 16.4,
+        "assessment": "This $39.00 transaction is higher than 16% of this card's 67 prior transactions (median was $67.95)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "V294",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.406,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "C14",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.327,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C1",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.314,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.232,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "V54",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.197,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3574157\n\nWhy flagged (top model factors):\n  - V294: pushed toward FRAUD (SHAP +0.406)\n  - C14: pushed toward NOT-fraud (SHAP -0.327)\n  - C1: pushed toward FRAUD (SHAP +0.314)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $39.00 transaction is higher than 16% of this card's 67 prior transactions (median was $67.95).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged because of a Vesta-engineered risk feature (V294), which was pushed toward fraud (0.406 shap_value).\n\n**Evidence**\nRecent transactions on this card found by get_recent_transactions_same_card tool: 10 transactions, approximate match, within 0.2 to 13.3 days before this transaction. Similar confirmed fraud cases found by find_similar_confirmed_fraud tool: 5 transactions with same product code and card network/type, within 30% of this transaction's amount. The $39.00 transaction is higher than 16% of this card's 67 prior transactions, according to check_amount_unusualness tool.\n\n**Suggested next step**\nRecommend that a human analyst review the case to determine whether the Vesta-engineered risk feature (V294) is a valid indicator of potential fraud, and whether any further investigation is warranted.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3495481,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.7558806538581848,
+    "evidence": {
+      "TransactionID": 3495481,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3495476,
+            "days_before_this_transaction": 0.0,
+            "amount": 214.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3495449,
+            "days_before_this_transaction": 0.0,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3494753,
+            "days_before_this_transaction": 0.1,
+            "amount": 214.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3494736,
+            "days_before_this_transaction": 0.1,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3490625,
+            "days_before_this_transaction": 1.3,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3484264,
+            "days_before_this_transaction": 3.3,
+            "amount": 171.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3484250,
+            "days_before_this_transaction": 3.3,
+            "amount": 171.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3478465,
+            "days_before_this_transaction": 5.5,
+            "amount": 206.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3478423,
+            "days_before_this_transaction": 5.5,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3476052,
+            "days_before_this_transaction": 6.4,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3489226,
+            "amount": 171.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3486307,
+            "amount": 171.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3483850,
+            "amount": 171.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3483836,
+            "amount": 171.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3478608,
+            "amount": 171.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 13,
+        "this_amount": 214.0,
+        "prior_median_amount": 206.0,
+        "prior_mean_amount": 163.92,
+        "prior_max_amount": 226.0,
+        "this_amount_percentile_vs_history": 53.8,
+        "assessment": "This $214.00 transaction is higher than 54% of this card's 13 prior transactions (median was $206.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "V294",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.482,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.398,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.223,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "V308",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.206,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "M6",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.204,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3495481\n\nWhy flagged (top model factors):\n  - V294: pushed toward FRAUD (SHAP +0.482)\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.398)\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.223)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $214.00 transaction is higher than 54% of this card's 13 prior transactions (median was $206.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**: C14 (pushed toward FRAUD, shap_value: 0.482) is the strongest driver for the flag.\n\n**Evidence**: This transaction was found to have 10 recent approximate matches (using an 8-column card/address proxy) with similar transactions on the same card. Additionally, there are 5 confirmed fraud cases with similar product codes, card networks/types, and amounts within 30% of this transaction. The tool \"check_amount_unusualness\" found that this transaction's amount is higher than 54% of the card's prior 13 transactions.\n\n**Suggested next step**: Review the case to determine whether this flag is worthy of further investigation.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3481840,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.49898746609687805,
+    "evidence": {
+      "TransactionID": 3481840,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3481780,
+            "days_before_this_transaction": 0.0,
+            "amount": 445.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3475728,
+            "days_before_this_transaction": 2.2,
+            "amount": 554.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3475647,
+            "days_before_this_transaction": 2.2,
+            "amount": 554.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3472921,
+            "days_before_this_transaction": 3.1,
+            "amount": 370.44,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3471066,
+            "days_before_this_transaction": 3.9,
+            "amount": 201.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3465505,
+            "days_before_this_transaction": 6.0,
+            "amount": 92.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3460761,
+            "days_before_this_transaction": 8.0,
+            "amount": 51.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3457935,
+            "days_before_this_transaction": 9.0,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3448250,
+            "days_before_this_transaction": 12.6,
+            "amount": 171.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3445714,
+            "days_before_this_transaction": 13.7,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3473888,
+            "amount": 445.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3473857,
+            "amount": 445.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3473289,
+            "amount": 490.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3472127,
+            "amount": 550.49,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3467439,
+            "amount": 315.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 90,
+        "this_amount": 445.0,
+        "prior_median_amount": 113.95,
+        "prior_mean_amount": 183.7,
+        "prior_max_amount": 993.16,
+        "this_amount_percentile_vs_history": 92.2,
+        "assessment": "This $445.00 transaction is higher than 92% of this card's 90 prior transactions (median was $113.95)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.672,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "D15",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.234,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.201,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "C14",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.188,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "card1",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.161,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3481840\n\nWhy flagged (top model factors):\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.672)\n  - D15: pushed toward NOT-fraud (SHAP -0.234)\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.201)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $445.00 transaction is higher than 92% of this card's 90 prior transactions (median was $113.95).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged by the model because of \"C14\" being pushed toward NOT-fraud, with a shap_value of -0.188.\n\n**Evidence**\nThere were 10 recent transactions (approximate match) with the same card (approximate match) that occurred within the past 14 days. There were also 5 confirmed fraud cases (same product code, same card network/type, amount within 30%) from the same product code. The transaction amount ($445.00) is higher than 92% of this card's 90 prior transactions (median was $113.95).\n\n**Suggested next step**\nRefer to the case for further review and analysis.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3566843,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.6082158088684082,
+    "evidence": {
+      "TransactionID": 3566843,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 0,
+        "history": []
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3566147,
+            "amount": 9.47,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3553956,
+            "amount": 7.81,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3553936,
+            "amount": 8.91,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3553922,
+            "amount": 7.93,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3553910,
+            "amount": 8.12,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 0,
+        "this_amount": 8.73,
+        "assessment": "No prior transaction history found for this approximated card - cannot assess whether this amount is unusual."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.432,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.37,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "card3",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.217,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "C14",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.184,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C1",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.16,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3566843\n\nWhy flagged (top model factors):\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.432)\n  - TransactionAmt: pushed toward NOT-fraud (SHAP -0.370)\n  - card3: pushed toward FRAUD (SHAP +0.217)\n\nEvidence found:\n  - 0 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - No prior transaction history found for this card - amount could not be compared.\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged because of the feature \"card6 is NOT debit\" (shap_value: 0.432), which was pushed toward fraud.\n\n**Evidence**\n- No recent same-card transactions were found (0 transactions found).\n- 5 similar confirmed fraud cases were found with similar product codes and card networks (TransactionID: 3566147, 3553956, 3553936, 3553922, and 3553910).\n- No prior transaction history was found for this approximated card, so the amount (8.73) could not be assessed for unusualness.\n- This card (approximate match) is associated with 5 confirmed fraud cases.\n\n**Suggested next step**\nRecommend that a human analyst review the case and the transactions in question to determine the next course of action.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3551085,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.646315336227417,
+    "evidence": {
+      "TransactionID": 3551085,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 8,
+        "history": [
+          {
+            "TransactionID": 3538802,
+            "days_before_this_transaction": 4.2,
+            "amount": 171.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3530603,
+            "days_before_this_transaction": 7.0,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3242470,
+            "days_before_this_transaction": 102.1,
+            "amount": 500.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3220771,
+            "days_before_this_transaction": 109.0,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3220447,
+            "days_before_this_transaction": 109.0,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3124225,
+            "days_before_this_transaction": 141.0,
+            "amount": 1104.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3123984,
+            "days_before_this_transaction": 141.0,
+            "amount": 1104.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3123763,
+            "days_before_this_transaction": 141.0,
+            "amount": 1104.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3549975,
+            "amount": 326.3,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3530658,
+            "amount": 335.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3530655,
+            "amount": 335.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3528256,
+            "amount": 280.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3527974,
+            "amount": 226.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 8,
+        "this_amount": 280.0,
+        "prior_median_amount": 363.0,
+        "prior_mean_amount": 555.38,
+        "prior_max_amount": 1104.0,
+        "this_amount_percentile_vs_history": 50.0,
+        "assessment": "This $280.00 transaction is higher than 50% of this card's 8 prior transactions (median was $363.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.404,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.307,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "M4 = M1",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.211,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          },
+          {
+            "feature": "V308",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.185,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "D2",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.16,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3551085\n\nWhy flagged (top model factors):\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.404)\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.307)\n  - M4 = M1: pushed toward NOT-fraud (SHAP -0.211)\n\nEvidence found:\n  - 8 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $280.00 transaction is higher than 50% of this card's 8 prior transactions (median was $363.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged due to the model's feature \"TransactionAmt\" (direction: pushed toward FRAUD), which has a shap_value of 0.404.\n\n**Evidence**\nTool \"get_recent_transactions_same_card\" found 8 recent transactions (approximate match) on the same card, with the most recent transaction occurring 4.2 days before this one. Tool \"find_similar_confirmed_fraud\" found 5 matches with confirmed fraud before this transaction's time, all with product code \"W\" and card network \"mastercard\". Tool \"check_amount_unusualness\" found that this transaction's amount ($280.00) is higher than 50% of the card's prior transactions.\n\n**Suggested next step**\nReview the case to determine whether the flagged features are indicative of fraud or not.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3430762,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.8084269165992737,
+    "evidence": {
+      "TransactionID": 3430762,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 4,
+        "history": [
+          {
+            "TransactionID": 3429667,
+            "days_before_this_transaction": 0.6,
+            "amount": 300.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3411019,
+            "days_before_this_transaction": 6.6,
+            "amount": 200.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3411016,
+            "days_before_this_transaction": 6.6,
+            "amount": 200.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 2999739,
+            "days_before_this_transaction": 126.6,
+            "amount": 25.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3416713,
+            "amount": 300.0,
+            "product_code": "H",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3348571,
+            "amount": 300.0,
+            "product_code": "H",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3348554,
+            "amount": 300.0,
+            "product_code": "H",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3341504,
+            "amount": 300.0,
+            "product_code": "H",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3341491,
+            "amount": 300.0,
+            "product_code": "H",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 4,
+        "this_amount": 300.0,
+        "prior_median_amount": 200.0,
+        "prior_mean_amount": 181.25,
+        "prior_max_amount": 300.0,
+        "this_amount_percentile_vs_history": 75.0,
+        "assessment": "This $300.00 transaction is higher than 75% of this card's 4 prior transactions (median was $200.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.451,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "D8",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.375,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "V294",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.372,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "ProductCD = H",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.367,
+            "meaning": "A code for the product/service category purchased (values: W, C, R, H, S). Kaggle does not disclose what each letter stands for."
+          },
+          {
+            "feature": "C13",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.286,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3430762\n\nWhy flagged (top model factors):\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.451)\n  - D8: pushed toward NOT-fraud (SHAP -0.375)\n  - V294: pushed toward FRAUD (SHAP +0.372)\n\nEvidence found:\n  - 4 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $300.00 transaction is higher than 75% of this card's 4 prior transactions (median was $200.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "**Why flagged**\n\nThe transaction was flagged because \"TransactionAmt\" was a strong reason for pushing toward FRAUD with a shap_value of 0.451.\n\n**Evidence**\n\nFour recent transactions (approximate match) were found on this card, with the most recent transactions being made 0.6 and 6.6 days ago, respectively, with amounts of $300.00, $200.00, and $200.00. Five confirmed fraud cases were found with similar characteristics (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time), with the most similar being TransactionID 3416713, which had an amount of $300.00, product code 'H', and card network 'mastercard'. Additionally, the transaction amount of $300.00 was higher than 75% of this card's 4 prior transactions (median was $200.00).\n\n**Suggested next step**\n\nRecommend further review of the account by a human analyst to assess the potential for fraud based on the evidence presented.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3504259,
+    "actually_fraud": true,
+    "model_fraud_probability": 0.9827463626861572,
+    "evidence": {
+      "TransactionID": 3504259,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 0,
+        "history": []
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3504014,
+            "amount": 50.78,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3503931,
+            "amount": 60.37,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3500249,
+            "amount": 43.65,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3500238,
+            "amount": 43.65,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3499632,
+            "amount": 50.72,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 0,
+        "this_amount": 53.55,
+        "assessment": "No prior transaction history found for this approximated card - cannot assess whether this amount is unusual."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C1",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.839,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C11",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.607,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C13",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.485,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C8",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.398,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C6",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.31,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3504259\n\nWhy flagged (top model factors):\n  - C1: pushed toward FRAUD (SHAP +0.839)\n  - C11: pushed toward FRAUD (SHAP +0.607)\n  - C13: pushed toward FRAUD (SHAP +0.485)\n\nEvidence found:\n  - 0 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - No prior transaction history found for this card - amount could not be compared.\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "**Why flagged**\n\nThe transaction was flagged because feature C1 (direction: pushed toward FRAUD) has the largest absolute shap_value (0.839).\n\n**Evidence**\n\nThe transaction amount of 53.55 is not unusual (no prior transaction history found for the approximated card). There are no recent same-card transactions (0 transactions found). However, there are 5 similar confirmed fraud cases with the same product code, same card network/type, and amounts within 30% of this transaction's amount. \n\n**Suggested next step**\n\nRecommend that a human analyst review the flagged transaction and investigate the reasons for the flag, particularly the strength of feature C1, and the 5 similar confirmed fraud cases.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3568676,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.5457389950752258,
+    "evidence": {
+      "TransactionID": 3568676,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3566204,
+            "days_before_this_transaction": 1.1,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3496924,
+            "days_before_this_transaction": 25.1,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3391996,
+            "days_before_this_transaction": 61.3,
+            "amount": 34.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3391269,
+            "days_before_this_transaction": 61.8,
+            "amount": 39.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3389166,
+            "days_before_this_transaction": 62.2,
+            "amount": 280.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3278759,
+            "days_before_this_transaction": 96.7,
+            "amount": 30.0,
+            "product_code": "S",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3134087,
+            "days_before_this_transaction": 144.8,
+            "amount": 97.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3086839,
+            "days_before_this_transaction": 156.6,
+            "amount": 97.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3072341,
+            "days_before_this_transaction": 158.9,
+            "amount": 300.0,
+            "product_code": "S",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3043877,
+            "days_before_this_transaction": 164.7,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 2,
+        "matches": [
+          {
+            "TransactionID": 3371563,
+            "amount": 500.0,
+            "product_code": "S",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3049186,
+            "amount": 400.0,
+            "product_code": "S",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 12,
+        "this_amount": 500.0,
+        "prior_median_amount": 97.0,
+        "prior_mean_amount": 130.12,
+        "prior_max_amount": 300.0,
+        "this_amount_percentile_vs_history": 100.0,
+        "assessment": "This $500.00 transaction is higher than 100% of this card's 12 prior transactions (median was $97.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C14",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.942,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.369,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "R_emaildomain",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.27,
+            "meaning": "Recipient's email domain (e.g. gmail.com), when the purchase has a separate recipient."
+          },
+          {
+            "feature": "DeviceInfo",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.194,
+            "meaning": "A free-text description of the purchaser's device/browser (e.g. a phone model or OS name)."
+          },
+          {
+            "feature": "V258",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.185,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3568676\n\nWhy flagged (top model factors):\n  - C14: pushed toward FRAUD (SHAP +0.942)\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.369)\n  - R_emaildomain: pushed toward NOT-fraud (SHAP -0.270)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $500.00 transaction is higher than 100% of this card's 12 prior transactions (median was $97.00).\n  - 2 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**: C14 (pushed toward FRAUD, shap_value: 0.942)\n\n**Evidence**: This card (approximate match) has 10 recent similar transactions (within 1.1-164.7 days, product code: W or S) with amounts ranging from $30.00 to $300.00. Two transactions with similar characteristics (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time) were also found. The transaction amount ($500.00) is higher than 100% of this card's 12 prior transactions (median was $97.00).\n\n**Suggested next step**: Review this case to assess the potential for fraudulent activity.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3532204,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.49490439891815186,
+    "evidence": {
+      "TransactionID": 3532204,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3532110,
+            "days_before_this_transaction": 0.0,
+            "amount": 1643.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3531989,
+            "days_before_this_transaction": 0.1,
+            "amount": 100.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3531291,
+            "days_before_this_transaction": 0.5,
+            "amount": 160.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3530947,
+            "days_before_this_transaction": 0.6,
+            "amount": 105.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3530420,
+            "days_before_this_transaction": 0.7,
+            "amount": 57.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3530416,
+            "days_before_this_transaction": 0.7,
+            "amount": 136.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3529607,
+            "days_before_this_transaction": 0.9,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3529567,
+            "days_before_this_transaction": 0.9,
+            "amount": 49.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3529404,
+            "days_before_this_transaction": 0.9,
+            "amount": 49.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3528346,
+            "days_before_this_transaction": 1.5,
+            "amount": 47.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3530712,
+            "amount": 97.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3530250,
+            "amount": 92.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3530242,
+            "amount": 107.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3530204,
+            "amount": 112.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3530130,
+            "amount": 108.5,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 1896,
+        "this_amount": 117.0,
+        "prior_median_amount": 65.0,
+        "prior_mean_amount": 125.6,
+        "prior_max_amount": 2369.43,
+        "this_amount_percentile_vs_history": 70.7,
+        "assessment": "This $117.00 transaction is higher than 71% of this card's 1896 prior transactions (median was $65.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C14",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.867,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "P_emaildomain",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.204,
+            "meaning": "Purchaser's email domain (e.g. gmail.com)."
+          },
+          {
+            "feature": "addr1",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.203,
+            "meaning": "Address information associated with the transaction (region-level). Exact definition not disclosed by Kaggle."
+          },
+          {
+            "feature": "V83",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.183,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "card1",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.158,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3532204\n\nWhy flagged (top model factors):\n  - C14: pushed toward FRAUD (SHAP +0.867)\n  - P_emaildomain: pushed toward NOT-fraud (SHAP -0.204)\n  - addr1: pushed toward NOT-fraud (SHAP -0.203)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $117.00 transaction is higher than 71% of this card's 1896 prior transactions (median was $65.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged due to feature C14, which pushed the transaction toward fraud (shap_value: 0.867). This is the strongest driver from shap_reasons.\n\n**Evidence**\nThe transaction has 10 recent same-card transactions (approximate match) with the card (match_type: approximate (8-column card/address proxy, see README limitation)). These transactions were found by the 'get_recent_transactions_same_card' tool. Additionally, there are 5 similar confirmed fraud transactions with the same product code and card network/type, and amounts within 30% of this transaction's amount. These transactions were found by the 'find_similar_confirmed_fraud' tool. The transaction amount ($117.00) is higher than 71% of this card's prior 1896 transactions.\n\n**Suggested next step**\nRecommend that a human analyst review the case to determine the next steps.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3568318,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.829834520816803,
+    "evidence": {
+      "TransactionID": 3568318,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 0,
+        "history": []
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3556042,
+            "amount": 119.21,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3555633,
+            "amount": 119.21,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3554907,
+            "amount": 119.21,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3554906,
+            "amount": 119.21,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3554904,
+            "amount": 119.21,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 0,
+        "this_amount": 99.97,
+        "assessment": "No prior transaction history found for this approximated card - cannot assess whether this amount is unusual."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "V258",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 1.266,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "C1",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.413,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C14",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.284,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "card3",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.244,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "R_emaildomain",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.186,
+            "meaning": "Recipient's email domain (e.g. gmail.com), when the purchase has a separate recipient."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3568318\n\nWhy flagged (top model factors):\n  - V258: pushed toward FRAUD (SHAP +1.266)\n  - C1: pushed toward NOT-fraud (SHAP -0.413)\n  - C14: pushed toward NOT-fraud (SHAP -0.284)\n\nEvidence found:\n  - 0 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - No prior transaction history found for this card - amount could not be compared.\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged due to C14 being pushed toward NOT-fraud (-0.284).\n\n**Evidence**\nThe transaction had 5 similar confirmed fraud cases, all with a product code of 'C', same card network/type, and an amount within 30%. These cases were found by the 'find_similar_confirmed_fraud' tool. Additionally, there were no recent same-card transactions found by the 'get_recent_transactions_same_card' tool. The 'check_amount_unusualness' tool found no prior transaction history for this approximated card, making it impossible to assess whether the amount is unusual. The 'get_top_shap_reasons' tool found that C14 was pushed toward NOT-fraud.\n\n**Suggested next step**\nRecommend that a human analyst review the transaction, particularly in light of the 'find_similar_confirmed_fraud' results and the direction of C14 (pushed toward NOT-fraud).",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3525359,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.49809375405311584,
+    "evidence": {
+      "TransactionID": 3525359,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 0,
+        "history": []
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3516317,
+            "amount": 30.37,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3513756,
+            "amount": 22.13,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3513687,
+            "amount": 24.96,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3513686,
+            "amount": 24.96,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3510925,
+            "amount": 31.97,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 0,
+        "this_amount": 26.07,
+        "assessment": "No prior transaction history found for this approximated card - cannot assess whether this amount is unusual."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.399,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "D8",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.328,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.25,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "card3",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.236,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "card2",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.186,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3525359\n\nWhy flagged (top model factors):\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.399)\n  - D8: pushed toward NOT-fraud (SHAP -0.328)\n  - TransactionAmt: pushed toward NOT-fraud (SHAP -0.250)\n\nEvidence found:\n  - 0 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - No prior transaction history found for this card - amount could not be compared.\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged due to the model's push toward FRAUD by feature C14, with a shap_value of 0.399.\n\n**Evidence**\nThe \"similar_confirmed_fraud\" tool found 5 similar confirmed fraud cases with the same product code, same card network/type, and amount within 30%. The \"recent_same_card_transactions\" tool found 0 similar transactions. The \"amount_unusualness\" tool found no prior transaction history for this approximated card and was unable to assess whether this amount is unusual.\n\n**Suggested next step**\nRecommend that a human analyst review the transaction to investigate the potential for fraudulent activity, given the model's strong indication of fraud by feature C14.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3469752,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.4663998484611511,
+    "evidence": {
+      "TransactionID": 3469752,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3458379,
+            "days_before_this_transaction": 4.3,
+            "amount": 94.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3452149,
+            "days_before_this_transaction": 6.5,
+            "amount": 36.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3443338,
+            "days_before_this_transaction": 10.2,
+            "amount": 171.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3439492,
+            "days_before_this_transaction": 11.4,
+            "amount": 31.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3435126,
+            "days_before_this_transaction": 13.1,
+            "amount": 114.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3434559,
+            "days_before_this_transaction": 13.3,
+            "amount": 54.47,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3430901,
+            "days_before_this_transaction": 14.5,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3422525,
+            "days_before_this_transaction": 17.5,
+            "amount": 91.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3421654,
+            "days_before_this_transaction": 18.1,
+            "amount": 48.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3408838,
+            "days_before_this_transaction": 21.5,
+            "amount": 58.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3462262,
+            "amount": 644.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3455189,
+            "amount": 554.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3453368,
+            "amount": 400.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3451398,
+            "amount": 654.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3451353,
+            "amount": 654.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 69,
+        "this_amount": 554.0,
+        "prior_median_amount": 59.0,
+        "prior_mean_amount": 98.77,
+        "prior_max_amount": 1212.95,
+        "this_amount_percentile_vs_history": 98.6,
+        "assessment": "This $554.00 transaction is higher than 99% of this card's 69 prior transactions (median was $59.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.671,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "D2",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.23,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "M3",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.153,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          },
+          {
+            "feature": "D3",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.151,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "card1",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.151,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3469752\n\nWhy flagged (top model factors):\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.671)\n  - D2: pushed toward NOT-fraud (SHAP -0.230)\n  - M3: pushed toward FRAUD (SHAP +0.153)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $554.00 transaction is higher than 99% of this card's 69 prior transactions (median was $59.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged due to the feature \"TransactionAmt\" (the transaction's payment amount) with a shap value of 0.671, pushing toward FRAUD.\n\n**Evidence**\nThis transaction (approximate match) has 10 recent transactions with the same card (approximate match) and 5 confirmed fraud transactions with the same product code (W), same card network (Mastercard), and amount within 30% (tool: find_similar_confirmed_fraud). The transaction amount is higher than 99% of this card's prior transactions (tool: check_amount_unusualness).\n\n**Suggested next step**\nReview the transaction and the associated evidence to determine if further action is needed.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3572408,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.6522425413131714,
+    "evidence": {
+      "TransactionID": 3572408,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3542421,
+            "days_before_this_transaction": 11.2,
+            "amount": 161.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3541483,
+            "days_before_this_transaction": 11.4,
+            "amount": 300.0,
+            "product_code": "R",
+            "was_confirmed_fraud": true
+          },
+          {
+            "TransactionID": 3519844,
+            "days_before_this_transaction": 18.5,
+            "amount": 50.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3519592,
+            "days_before_this_transaction": 18.6,
+            "amount": 30.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3513909,
+            "days_before_this_transaction": 20.6,
+            "amount": 100.0,
+            "product_code": "R",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3498603,
+            "days_before_this_transaction": 26.2,
+            "amount": 445.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3494071,
+            "days_before_this_transaction": 27.3,
+            "amount": 319.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3471819,
+            "days_before_this_transaction": 35.1,
+            "amount": 200.0,
+            "product_code": "R",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3446216,
+            "days_before_this_transaction": 44.9,
+            "amount": 100.0,
+            "product_code": "R",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3434273,
+            "days_before_this_transaction": 49.3,
+            "amount": 87.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3570939,
+            "amount": 300.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3570932,
+            "amount": 300.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3570927,
+            "amount": 300.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3570828,
+            "amount": 325.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3570822,
+            "amount": 325.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 68,
+        "this_amount": 300.0,
+        "prior_median_amount": 100.0,
+        "prior_mean_amount": 147.26,
+        "prior_max_amount": 604.95,
+        "this_amount_percentile_vs_history": 83.8,
+        "assessment": "This $300.00 transaction is higher than 84% of this card's 68 prior transactions (median was $100.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C14",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.992,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "ProductCD = R",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.566,
+            "meaning": "A code for the product/service category purchased (values: W, C, R, H, S). Kaggle does not disclose what each letter stands for."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.471,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "id_30",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.309,
+            "meaning": "Network/device fingerprint information (e.g. IP-related signals, browser/OS info, screen resolution) collected by Vesta's fraud system and digital security partners. The actual real-world meaning of each individual id_ column is masked - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "R_emaildomain",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.238,
+            "meaning": "Recipient's email domain (e.g. gmail.com), when the purchase has a separate recipient."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3572408\n\nWhy flagged (top model factors):\n  - C14: pushed toward FRAUD (SHAP +0.992)\n  - ProductCD = R: pushed toward NOT-fraud (SHAP -0.566)\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.471)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $300.00 transaction is higher than 84% of this card's 68 prior transactions (median was $100.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged by the model due to the feature \"C14\" being pushed toward FRAUD with a shap_value of 0.992.\n\n**Evidence**\nRecent same-card transactions found by the \"get_recent_transactions_same_card\" tool: 10 approximate matches found, including one confirmed fraud case (TransactionID 3541483). Similar confirmed fraud cases found by the \"find_similar_confirmed_fraud\" tool: 5 matches found, all with product code \"R\" and card network \"visa\". This transaction's amount ($300.00) is higher than 84% of this card's 68 prior transactions.\n\n**Suggested next step**\nRecommend human analyst review to assess the potential impact of the features driving the flag.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3476249,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.5436257123947144,
+    "evidence": {
+      "TransactionID": 3476249,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3457233,
+            "days_before_this_transaction": 7.1,
+            "amount": 159.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3439762,
+            "days_before_this_transaction": 13.9,
+            "amount": 311.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3417534,
+            "days_before_this_transaction": 21.8,
+            "amount": 305.97,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3295261,
+            "days_before_this_transaction": 58.9,
+            "amount": 311.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3113219,
+            "days_before_this_transaction": 118.8,
+            "amount": 311.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3101217,
+            "days_before_this_transaction": 122.0,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3095186,
+            "days_before_this_transaction": 122.9,
+            "amount": 82.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3081085,
+            "days_before_this_transaction": 125.1,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3079854,
+            "days_before_this_transaction": 125.5,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3060113,
+            "days_before_this_transaction": 128.9,
+            "amount": 125.0,
+            "product_code": "R",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3472961,
+            "amount": 226.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3472855,
+            "amount": 226.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3460230,
+            "amount": 255.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3429573,
+            "amount": 226.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3429572,
+            "amount": 280.0,
+            "product_code": "W",
+            "card_network": "mastercard",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 11,
+        "this_amount": 310.0,
+        "prior_median_amount": 159.95,
+        "prior_mean_amount": 185.8,
+        "prior_max_amount": 311.95,
+        "this_amount_percentile_vs_history": 72.7,
+        "assessment": "This $310.00 transaction is higher than 73% of this card's 11 prior transactions (median was $159.95)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.339,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.299,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "P_emaildomain",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.253,
+            "meaning": "Purchaser's email domain (e.g. gmail.com)."
+          },
+          {
+            "feature": "C13",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.218,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C11",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.187,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3476249\n\nWhy flagged (top model factors):\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.339)\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.299)\n  - P_emaildomain: pushed toward NOT-fraud (SHAP -0.253)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $310.00 transaction is higher than 73% of this card's 11 prior transactions (median was $159.95).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged because the model's strongest driver was \"TransactionAmt\" (shap_value: 0.339), which was pushed toward FRAUD.\n\n**Evidence**\nThis transaction was found to have 10 recent transactions on the same card (approximate match), with the most recent transaction being 7.1 days before this one, amounting to $159.95. Additionally, 5 confirmed fraud cases were found with similar characteristics (same product code, same card network/type, amount within 30%). The $310.00 transaction amount is higher than 73% of this card's 11 prior transactions (median was $159.95).\n\n**Suggested next step**\nRecommend that a human analyst review this case to determine the validity of the flagged transaction.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3438961,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.663571298122406,
+    "evidence": {
+      "TransactionID": 3438961,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3438960,
+            "days_before_this_transaction": 0.0,
+            "amount": 40.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3437850,
+            "days_before_this_transaction": 0.6,
+            "amount": 47.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3437348,
+            "days_before_this_transaction": 0.7,
+            "amount": 429.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3436274,
+            "days_before_this_transaction": 1.0,
+            "amount": 57.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3435334,
+            "days_before_this_transaction": 1.6,
+            "amount": 40.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3435329,
+            "days_before_this_transaction": 1.6,
+            "amount": 40.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3435327,
+            "days_before_this_transaction": 1.6,
+            "amount": 40.0,
+            "product_code": "H",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3434372,
+            "days_before_this_transaction": 1.8,
+            "amount": 26.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3433536,
+            "days_before_this_transaction": 2.0,
+            "amount": 104.47,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3432470,
+            "days_before_this_transaction": 2.6,
+            "amount": 77.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3431966,
+            "amount": 50.0,
+            "product_code": "H",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3431963,
+            "amount": 50.0,
+            "product_code": "H",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3431360,
+            "amount": 50.0,
+            "product_code": "H",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3431359,
+            "amount": 50.0,
+            "product_code": "H",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3431234,
+            "amount": 50.0,
+            "product_code": "H",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 551,
+        "this_amount": 40.0,
+        "prior_median_amount": 59.0,
+        "prior_mean_amount": 111.54,
+        "prior_max_amount": 834.0,
+        "this_amount_percentile_vs_history": 20.5,
+        "assessment": "This $40.00 transaction is higher than 21% of this card's 551 prior transactions (median was $59.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C14",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.592,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.383,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "V294",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.221,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "V258",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.179,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "V70",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.177,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3438961\n\nWhy flagged (top model factors):\n  - C14: pushed toward FRAUD (SHAP +0.592)\n  - TransactionAmt: pushed toward NOT-fraud (SHAP -0.383)\n  - V294: pushed toward FRAUD (SHAP +0.221)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $40.00 transaction is higher than 21% of this card's 551 prior transactions (median was $59.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**: The transaction was flagged because the feature C14 was pushed toward fraud.\n\n**Evidence**: \nThe tool \"get_recent_transactions_same_card\" found 10 approximate matches to this card (8-column card/address proxy). The tool \"find_similar_confirmed_fraud\" found 5 similar confirmed fraud cases with the same product code, card network/type, and amount within 30%. The tool \"check_amount_unusualness\" found that this transaction's amount ($40.00) is higher than 21% of this card's 551 prior transactions.\n\n**Suggested next step**: Recommend that a human analyst review this case to determine if further action is warranted.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3462646,
+    "actually_fraud": true,
+    "model_fraud_probability": 0.9826151132583618,
+    "evidence": {
+      "TransactionID": 3462646,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 0,
+        "history": []
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3461642,
+            "amount": 13.03,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3459935,
+            "amount": 15.25,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3459918,
+            "amount": 15.25,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3459909,
+            "amount": 15.25,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3459892,
+            "amount": 15.25,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 0,
+        "this_amount": 14.39,
+        "assessment": "No prior transaction history found for this approximated card - cannot assess whether this amount is unusual."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C1",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.933,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "V45",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.626,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "C8",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.552,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C11",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.539,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "C6",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.259,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3462646\n\nWhy flagged (top model factors):\n  - C1: pushed toward FRAUD (SHAP +0.933)\n  - V45: pushed toward FRAUD (SHAP +0.626)\n  - C8: pushed toward FRAUD (SHAP +0.552)\n\nEvidence found:\n  - 0 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - No prior transaction history found for this card - amount could not be compared.\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\n\nThe transaction was flagged by the model due to the feature \"C1\" being pushed toward fraud with a shap_value of 0.933.\n\n**Evidence**\n\n* The tool \"find_similar_confirmed_fraud\" found 5 similar transactions with the same product code, card network/type, and amount within 30% of this transaction. These transactions were confirmed as fraud before this transaction's time.\n* The tool \"get_recent_transactions_same_card\" found no recent transactions on the same card (approximate match).\n* The tool \"check_amount_unusualness\" found no prior transaction history for this approximated card, and therefore could not assess whether the amount of this transaction is unusual.\n* The tool \"get_top_shap_reasons\" found that the feature \"C1\" was pushed toward fraud, among other features.\n\n**Suggested next step**\n\nRecommend review by a human analyst to assess the transaction's potential for fraud.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3462678,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.9005061388015747,
+    "evidence": {
+      "TransactionID": 3462678,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3462676,
+            "days_before_this_transaction": 0.0,
+            "amount": 604.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3425540,
+            "days_before_this_transaction": 13.8,
+            "amount": 250.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3425531,
+            "days_before_this_transaction": 13.8,
+            "amount": 304.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3423515,
+            "days_before_this_transaction": 14.6,
+            "amount": 349.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3413196,
+            "days_before_this_transaction": 17.7,
+            "amount": 125.0,
+            "product_code": "R",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3356770,
+            "days_before_this_transaction": 35.8,
+            "amount": 261.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3284713,
+            "days_before_this_transaction": 57.4,
+            "amount": 211.16,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3257588,
+            "days_before_this_transaction": 66.5,
+            "amount": 261.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3242546,
+            "days_before_this_transaction": 71.6,
+            "amount": 628.47,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3169314,
+            "days_before_this_transaction": 95.7,
+            "amount": 261.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3458547,
+            "amount": 500.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3457316,
+            "amount": 554.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3451533,
+            "amount": 554.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3447694,
+            "amount": 445.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          },
+          {
+            "TransactionID": 3447690,
+            "amount": 445.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "credit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 15,
+        "this_amount": 604.0,
+        "prior_median_amount": 261.95,
+        "prior_mean_amount": 283.96,
+        "prior_max_amount": 628.47,
+        "this_amount_percentile_vs_history": 86.7,
+        "assessment": "This $604.00 transaction is higher than 87% of this card's 15 prior transactions (median was $261.95)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.592,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "V294",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.462,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "card6 is NOT debit",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.321,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          },
+          {
+            "feature": "V308",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.243,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "V281",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.219,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3462678\n\nWhy flagged (top model factors):\n  - TransactionAmt: pushed toward FRAUD (SHAP +0.592)\n  - V294: pushed toward FRAUD (SHAP +0.462)\n  - card6 is NOT debit: pushed toward FRAUD (SHAP +0.321)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $604.00 transaction is higher than 87% of this card's 15 prior transactions (median was $261.95).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nThe transaction was flagged due to C14 being pushed toward FRAUD (shap_value: 0.592).\n\n**Evidence**\nThe transaction has 10 recent transactions with this card (approximate match), including one transaction from 0 days before this transaction. 5 confirmed fraud transactions have similar product code and card network/type (visa, credit). The transaction's payment amount is higher than 87% of this card's prior transactions.\n\n**Suggested next step**\nRecommend a review of the transaction by a human analyst to assess potential risk.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3525769,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.47990965843200684,
+    "evidence": {
+      "TransactionID": 3525769,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3521321,
+            "days_before_this_transaction": 1.7,
+            "amount": 171.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3520031,
+            "days_before_this_transaction": 1.9,
+            "amount": 1104.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3519955,
+            "days_before_this_transaction": 1.9,
+            "amount": 1104.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3519771,
+            "days_before_this_transaction": 2.0,
+            "amount": 1104.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3518308,
+            "days_before_this_transaction": 2.7,
+            "amount": 49.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3517205,
+            "days_before_this_transaction": 2.9,
+            "amount": 218.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3514852,
+            "days_before_this_transaction": 3.8,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3509163,
+            "days_before_this_transaction": 5.8,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3507346,
+            "days_before_this_transaction": 6.5,
+            "amount": 58.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3490518,
+            "days_before_this_transaction": 11.8,
+            "amount": 56.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3524057,
+            "amount": 59.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3523965,
+            "amount": 51.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3523949,
+            "amount": 59.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3521520,
+            "amount": 44.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3521462,
+            "amount": 59.0,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 79,
+        "this_amount": 59.0,
+        "prior_median_amount": 59.0,
+        "prior_mean_amount": 128.17,
+        "prior_max_amount": 1104.0,
+        "this_amount_percentile_vs_history": 46.8,
+        "assessment": "This $59.00 transaction is higher than 47% of this card's 79 prior transactions (median was $59.00)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "V294",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.45,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "D2",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.263,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "M5",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.165,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          },
+          {
+            "feature": "V54",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.159,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "P_emaildomain",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.153,
+            "meaning": "Purchaser's email domain (e.g. gmail.com)."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3525769\n\nWhy flagged (top model factors):\n  - V294: pushed toward FRAUD (SHAP +0.450)\n  - D2: pushed toward NOT-fraud (SHAP -0.263)\n  - M5: pushed toward FRAUD (SHAP +0.165)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $59.00 transaction is higher than 47% of this card's 79 prior transactions (median was $59.00).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "**Why flagged**\nThe strongest driver for the flag is \"C14\" (direction: toward FRAUD) with a shap_value of 0.45.\n\n**Evidence**\nThe tool \"get_recent_transactions_same_card\" found 10 similar transactions (approximate match) on this card in the past 11.8 days, with the most recent transaction being 1.7 days before this one. The tool \"find_similar_confirmed_fraud\" found 5 similar confirmed fraud cases with the same product code and card network/type. The tool \"check_amount_unusualness\" found that this transaction is higher than 47% of this card's prior transactions.\n\n**Suggested next step**\nReview the case for potential fraud and consider further investigation or additional analysis.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3462992,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.7076246738433838,
+    "evidence": {
+      "TransactionID": 3462992,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3460871,
+            "days_before_this_transaction": 0.9,
+            "amount": 6.52,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3455945,
+            "days_before_this_transaction": 2.7,
+            "amount": 60.87,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3454659,
+            "days_before_this_transaction": 3.0,
+            "amount": 47.03,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3453623,
+            "days_before_this_transaction": 3.6,
+            "amount": 171.16,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3452756,
+            "days_before_this_transaction": 3.8,
+            "amount": 39.96,
+            "product_code": "C",
+            "was_confirmed_fraud": true
+          },
+          {
+            "TransactionID": 3452745,
+            "days_before_this_transaction": 3.8,
+            "amount": 36.64,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3452526,
+            "days_before_this_transaction": 3.9,
+            "amount": 12.05,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3449948,
+            "days_before_this_transaction": 4.8,
+            "amount": 31.97,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3446773,
+            "days_before_this_transaction": 5.9,
+            "amount": 27.67,
+            "product_code": "C",
+            "was_confirmed_fraud": true
+          },
+          {
+            "TransactionID": 3441764,
+            "days_before_this_transaction": 8.0,
+            "amount": 105.83,
+            "product_code": "C",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3459432,
+            "amount": 33.26,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3459340,
+            "amount": 31.85,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3456838,
+            "amount": 44.45,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3456663,
+            "amount": 28.4,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3456028,
+            "amount": 24.84,
+            "product_code": "C",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 70,
+        "this_amount": 34.9,
+        "prior_median_amount": 36.63,
+        "prior_mean_amount": 48.19,
+        "prior_max_amount": 171.16,
+        "this_amount_percentile_vs_history": 48.6,
+        "assessment": "This $34.90 transaction is higher than 49% of this card's 70 prior transactions (median was $36.63)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "D2",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.476,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "C11",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.324,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.308,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "C6",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.289,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "card1",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.273,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3462992\n\nWhy flagged (top model factors):\n  - D2: pushed toward FRAUD (SHAP +0.476)\n  - C11: pushed toward FRAUD (SHAP +0.324)\n  - TransactionAmt: pushed toward NOT-fraud (SHAP -0.308)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $34.90 transaction is higher than 49% of this card's 70 prior transactions (median was $36.63).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "**Why flagged**\n\nThe transaction was flagged by the model due to the feature \"D2\" with a direction pushed toward FRAUD and a shap_value of 0.476.\n\n**Evidence**\n\nThis card (approximate match) has 10 recent transactions with similar characteristics (product code 'C', approximate match). One of these transactions (TransactionID 3452756) was confirmed to be fraudulent. There are 5 similar confirmed fraud cases with similar product code 'C' and card network 'visa'. The transaction's amount ($34.90) is higher than 49% of this card's 70 prior transactions.\n\n**Suggested next step**\n\nRecommend a review of the transaction by a human analyst to assess the potential for fraud.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3566578,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.7081267833709717,
+    "evidence": {
+      "TransactionID": 3566578,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 0,
+        "history": []
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3564637,
+            "amount": 38.12,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3563166,
+            "amount": 39.47,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3563163,
+            "amount": 39.47,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3560313,
+            "amount": 58.1,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3560294,
+            "amount": 58.1,
+            "product_code": "C",
+            "card_network": "mastercard",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 0,
+        "this_amount": 53.61,
+        "assessment": "No prior transaction history found for this approximated card - cannot assess whether this amount is unusual."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C14",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 1.19,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "V258",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.185,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "P_emaildomain",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.181,
+            "meaning": "Purchaser's email domain (e.g. gmail.com)."
+          },
+          {
+            "feature": "V70",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.175,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "card6 = debit",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.166,
+            "meaning": "Payment card information - card type, category, issuing bank, country, etc. Kaggle discloses that card4 is the card network (visa/mastercard/amex/discover) and card6 is credit vs. debit; the rest (card1, card2, card3, card5) are not individually documented."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3566578\n\nWhy flagged (top model factors):\n  - C14: pushed toward FRAUD (SHAP +1.190)\n  - V258: pushed toward NOT-fraud (SHAP -0.185)\n  - P_emaildomain: pushed toward NOT-fraud (SHAP -0.181)\n\nEvidence found:\n  - 0 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - No prior transaction history found for this card - amount could not be compared.\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**: The transaction was flagged by the shap_reasons tool due to the feature C14 being pushed toward fraud (shap_value: 1.19).\n\n**Evidence**: The following tools were run:\n- The get_recent_transactions_same_card tool found no recent transactions on this card (approximate match).\n- The find_similar_confirmed_fraud tool found 5 similar confirmed fraud cases: TransactionIDs 3564637, 3563166, 3563163, 3560313, and 3560294.\n- The check_amount_unusualness tool found no prior transaction history for this approximated card, so could not assess whether this amount is unusual.\n\n**Suggested next step**: Review the 5 similar confirmed fraud cases and assess whether they are relevant to this transaction.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3575243,
+    "actually_fraud": true,
+    "model_fraud_probability": 0.5339625477790833,
+    "evidence": {
+      "TransactionID": 3575243,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3499305,
+            "days_before_this_transaction": 27.1,
+            "amount": 107.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3452753,
+            "days_before_this_transaction": 43.4,
+            "amount": 107.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3323784,
+            "days_before_this_transaction": 86.2,
+            "amount": 107.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3295071,
+            "days_before_this_transaction": 93.4,
+            "amount": 82.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3219290,
+            "days_before_this_transaction": 118.4,
+            "amount": 107.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3216149,
+            "days_before_this_transaction": 119.3,
+            "amount": 209.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3176898,
+            "days_before_this_transaction": 133.1,
+            "amount": 107.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3152646,
+            "days_before_this_transaction": 141.3,
+            "amount": 57.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3121798,
+            "days_before_this_transaction": 151.1,
+            "amount": 57.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3106263,
+            "days_before_this_transaction": 155.2,
+            "amount": 311.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3572285,
+            "amount": 175.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3572269,
+            "amount": 175.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3572266,
+            "amount": 250.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3572226,
+            "amount": 250.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3552675,
+            "amount": 200.0,
+            "product_code": "R",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 12,
+        "this_amount": 200.0,
+        "prior_median_amount": 107.95,
+        "prior_mean_amount": 118.12,
+        "prior_max_amount": 311.95,
+        "this_amount_percentile_vs_history": 83.3,
+        "assessment": "This $200.00 transaction is higher than 83% of this card's 12 prior transactions (median was $107.95)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "C14",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 1.06,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          },
+          {
+            "feature": "id_09",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.401,
+            "meaning": "Network/device fingerprint information (e.g. IP-related signals, browser/OS info, screen resolution) collected by Vesta's fraud system and digital security partners. The actual real-world meaning of each individual id_ column is masked - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "ProductCD = R",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.4,
+            "meaning": "A code for the product/service category purchased (values: W, C, R, H, S). Kaggle does not disclose what each letter stands for."
+          },
+          {
+            "feature": "TransactionAmt",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.361,
+            "meaning": "The transaction's payment amount, in US dollars."
+          },
+          {
+            "feature": "id_17",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.214,
+            "meaning": "Network/device fingerprint information (e.g. IP-related signals, browser/OS info, screen resolution) collected by Vesta's fraud system and digital security partners. The actual real-world meaning of each individual id_ column is masked - meaning unknown (anonymized)."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3575243\n\nWhy flagged (top model factors):\n  - C14: pushed toward FRAUD (SHAP +1.060)\n  - id_09: pushed toward FRAUD (SHAP +0.401)\n  - ProductCD = R: pushed toward NOT-fraud (SHAP -0.400)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $200.00 transaction is higher than 83% of this card's 12 prior transactions (median was $107.95).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\nTransaction flagged due to feature C14, which is pushed toward FRAUD (shap_value: 1.06).\n\n**Evidence**\n* 10 recent transactions found (approximate match) on this card, with most in the past 118 days, all with product code 'W'.\n* 5 transactions were found to be similar to this transaction, all with product code 'R', all confirmed fraud before this transaction's time.\n* This $200.00 transaction is higher than 83% of this card's 12 prior transactions (median was $107.95).\n\n**Suggested next step**\nRecommend human analyst review this case.",
+    "ai_error": null
+  },
+  {
+    "TransactionID": 3466278,
+    "actually_fraud": false,
+    "model_fraud_probability": 0.6094422340393066,
+    "evidence": {
+      "TransactionID": 3466278,
+      "recent_same_card_transactions": {
+        "tool": "get_recent_transactions_same_card",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "transactions_found": 10,
+        "history": [
+          {
+            "TransactionID": 3464456,
+            "days_before_this_transaction": 0.9,
+            "amount": 39.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3464442,
+            "days_before_this_transaction": 0.9,
+            "amount": 112.99,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3456029,
+            "days_before_this_transaction": 4.0,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3448981,
+            "days_before_this_transaction": 6.4,
+            "amount": 59.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3447956,
+            "days_before_this_transaction": 6.9,
+            "amount": 112.99,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3340086,
+            "days_before_this_transaction": 43.1,
+            "amount": 107.95,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3325718,
+            "days_before_this_transaction": 47.3,
+            "amount": 226.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3291090,
+            "days_before_this_transaction": 56.9,
+            "amount": 117.0,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3149492,
+            "days_before_this_transaction": 104.1,
+            "amount": 108.5,
+            "product_code": "W",
+            "was_confirmed_fraud": false
+          },
+          {
+            "TransactionID": 3131687,
+            "days_before_this_transaction": 109.3,
+            "amount": 50.0,
+            "product_code": "R",
+            "was_confirmed_fraud": false
+          }
+        ]
+      },
+      "similar_confirmed_fraud": {
+        "tool": "find_similar_confirmed_fraud",
+        "similarity_criteria": "same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time",
+        "matches_found": 5,
+        "matches": [
+          {
+            "TransactionID": 3465826,
+            "amount": 107.95,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3465705,
+            "amount": 107.95,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3465353,
+            "amount": 108.95,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3464518,
+            "amount": 107.95,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          },
+          {
+            "TransactionID": 3464194,
+            "amount": 143.95,
+            "product_code": "W",
+            "card_network": "visa",
+            "card_type": "debit"
+          }
+        ]
+      },
+      "amount_unusualness": {
+        "tool": "check_amount_unusualness",
+        "match_type": "approximate (8-column card/address proxy, see README limitation)",
+        "prior_transactions_found": 13,
+        "this_amount": 117.0,
+        "prior_median_amount": 112.99,
+        "prior_mean_amount": 110.72,
+        "prior_max_amount": 226.0,
+        "this_amount_percentile_vs_history": 61.5,
+        "assessment": "This $117.00 transaction is higher than 62% of this card's 13 prior transactions (median was $112.99)."
+      },
+      "shap_reasons": {
+        "tool": "get_top_shap_reasons",
+        "reasons_found": 5,
+        "reasons": [
+          {
+            "feature": "D2",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.318,
+            "meaning": "A \"timedelta\" feature - e.g. days since a previous transaction. The actual real-world meaning of each individual D column is masked by Vesta."
+          },
+          {
+            "feature": "V308",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.29,
+            "meaning": "A Vesta-engineered risk feature (ranking, counting, or entity-relationship signal, per Vesta's fraud models). The actual real-world meaning of each individual V column is masked by Vesta - meaning unknown (anonymized)."
+          },
+          {
+            "feature": "P_emaildomain",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.222,
+            "meaning": "Purchaser's email domain (e.g. gmail.com)."
+          },
+          {
+            "feature": "M5",
+            "direction": "pushed toward FRAUD",
+            "shap_value": 0.202,
+            "meaning": "A \"match\" feature - e.g. whether the name on the card matches the name on the address. The actual real-world meaning of each individual M column is masked by Vesta."
+          },
+          {
+            "feature": "C14",
+            "direction": "pushed toward NOT-fraud",
+            "shap_value": -0.188,
+            "meaning": "A \"counting\" feature - e.g. how many addresses are associated with the payment card. The actual real-world meaning of each individual C column is masked by Vesta."
+          }
+        ]
+      }
+    },
+    "template_note": "CASE NOTE (template-generated, no AI) - TransactionID 3466278\n\nWhy flagged (top model factors):\n  - D2: pushed toward FRAUD (SHAP +0.318)\n  - V308: pushed toward FRAUD (SHAP +0.290)\n  - P_emaildomain: pushed toward NOT-fraud (SHAP -0.222)\n\nEvidence found:\n  - 10 prior transaction(s) found for this card (approximate (8-column card/address proxy, see README limitation)).\n  - This $117.00 transaction is higher than 62% of this card's 13 prior transactions (median was $112.99).\n  - 5 similar past confirmed-fraud case(s) found (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time).\n\nSuggested next step:\n  - Multiple similar confirmed-fraud cases found: recommend holding the transaction and contacting the cardholder to verify.",
+    "ai_note": "Here is the case note:\n\n**Why flagged**\n\nThe transaction was flagged because \"C14\" (the feature meaning \"how many addresses are associated with the payment card\") pushed the transaction toward NOT-fraud.\n\n**Evidence**\n\n* This card (approximate match) has 10 recent similar transactions: TransactionIDs 3464456, 3464442, 3456029, 3448981, 3447956, 3340086, 3325718, 3291090, 3149492, and 3131687, all with product code \"W\", in the past 104 days.\n* 5 confirmed fraud transactions with similar characteristics (same product code, same card network/type, amount within 30%, confirmed fraud before this transaction's time) were found: TransactionIDs 3465826, 3465705, 3465353, 3464518, and 3464194.\n* The transaction amount of $117.00 is higher than 62% of this card's 13 prior transactions (median was $112.99).\n\n**Suggested next step**\n\nRecommend human analyst review to determine whether additional investigation is warranted.",
+    "ai_error": null
+  }
+]
